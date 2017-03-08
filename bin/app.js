@@ -11,6 +11,14 @@ const compiler = webpack(webpack_config);
 const app = new Koa();
 const router = new Router();
 const dist_path = path.join(__dirname, '..', 'dist');
+if (process.env.NODE_ENV !== 'production') {
+  app.use(require('koa-webpack-dev-middleware')(compiler, {
+    noInfo: true,
+    index: 'index.min.html',
+    publicPath: webpack_config.publicPath,
+  }));
+  app.use(require('koa-webpack-hot-middleware')(compiler));
+}
 
 router.get('/', function (ctx, next) {
   this.response.type = 'html';
@@ -18,12 +26,6 @@ router.get('/', function (ctx, next) {
     path.resolve(dist_path, 'index.min.html'));
 });
 app.use(router.routes());
-
-if (process.env.NODE_ENV !== 'production') {
-  console.log(process.env.NODE_ENV);
-  app.use(require('koa-webpack-dev-middleware')(compiler));
-  app.use(require('koa-webpack-hot-middleware')(compiler));
-}
-
 app.use(serve(path.join(__dirname, '..', 'dist')));
+
 module.exports = app;

@@ -2,6 +2,7 @@ let webpack = require('webpack');
 let path = require('path');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CheckerPlugin } = require('awesome-typescript-loader');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const DIST_PATH = path.resolve(__dirname, 'dist');
 const dev_mode = process.env.NODE_ENV !== 'production';
@@ -32,6 +33,10 @@ let plugins = [
   new HtmlWebpackPlugin({
     filename: 'index.min.html',
     template: 'src/index.html'
+  }),
+  new CleanWebpackPlugin(['dist'], {
+    root: __dirname,
+    verbose: true,
   })
 ];
 
@@ -45,14 +50,16 @@ if (dev_mode) {
     'webpack-hot-middleware/client?reload=true',
   ]);
 
-  ts_rule.use.splice(0, 0, 'react-hot-loader');
+  output.publicPath = '/';
+
+  ts_rule.use.splice(0, 0, 'react-hot-loader/webpack');
 
   plugins.push(...[
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
   ]);
 
-  devtool = 'cheap-eval-source-map';
+  devtool = 'eval-source-map';
 }
 
 /**
@@ -63,12 +70,6 @@ let webpack_config = {
   output,
   module: {
     rules: [
-      {
-        enforce: 'pre',
-        test: /\.(ts|tsx)?$/,
-        use: "source-map-loader",
-        exclude: /node_modules/,
-      },
       ts_rule,
     ]
   },

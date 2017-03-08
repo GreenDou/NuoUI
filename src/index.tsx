@@ -1,6 +1,8 @@
 // import { createStore } from 'redux';
 import * as React from 'react';
 import { render } from 'react-dom';
+
+import PixiPanel from './pixi_panel';
 // import { Provider } from 'react-redux';
 // TODO: Check @types/react-intl if they fix the problem of 2.1.1
 // import { IntlProvider } from 'react-intl';
@@ -14,7 +16,9 @@ render(
       // locale={locale}
       // messages={msg}
     // >
-      <div>Hello World!</div>
+      <div>
+        <PixiPanel />
+      </div>
         // </IntlProvider>
   // </Provider>
   ,
