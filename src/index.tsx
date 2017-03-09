@@ -15,10 +15,12 @@ render(
     // <IntlProvider
       // locale={locale}
       // messages={msg}
-    // >
-      <div>
-        <PixiPanel />
-      </div>
+  // >
+  <div>
+    <PixiPanel on_load={(app) => {
+      (window as any).app = app;
+    }} />
+  </div>
         // </IntlProvider>
   // </Provider>
   ,

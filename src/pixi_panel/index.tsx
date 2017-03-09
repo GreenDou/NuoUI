@@ -3,6 +3,10 @@ import * as React from 'react';
 
 interface PixiPanelProps {
   on_load?:(app:any, pixi:typeof PIXI) => void;
+  size?: {
+    height:number;
+    width:number;
+  }
 };
 
 interface PixiPanelStates { };
@@ -14,11 +18,13 @@ class PixiPanel extends React.Component<PixiPanelProps, PixiPanelStates> {
     this.element.appendChild(app.view);
     PIXI.loader.add(
         'Test',
-        'https://o44j7l4g3.qnssl.com/FoUnSWbX4hL1zivr3M13173OFAFr')
+        'https://o44j7l4g3.qnssl.com/FoUnSWbX4hL1zivr3M13173OFAFr', {
+          loadType: 2, // Use Image to load reource
+        })
       .load((loader, resources) => {
         const test = new PIXI.Sprite(resources.Test.texture);
-        test.x = app.renderer.width / 2;
-        test.y = app.renderer.height / 2;
+        test.x = 0;
+        test.y = 0;
         app.stage.addChild(test);
       })
     if (this.props.on_load) {

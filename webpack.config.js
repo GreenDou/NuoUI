@@ -59,7 +59,7 @@ if (dev_mode) {
     new webpack.NamedModulesPlugin(),
   ]);
 
-  devtool = 'eval-source-map';
+  devtool = 'source-map';
 }
 
 /**
