@@ -1,7 +1,6 @@
 {
   "name": "nuo-ui",
   "version": "1.0.0",
-  "main": "src/index.ts",
   "repository": "https://github.com/GreenDou/nuo-ui.git",
   "author": "greendou <zn.he@foxmail.com>",
   "license": "MIT",
