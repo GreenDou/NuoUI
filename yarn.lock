@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@types/pixi.js@^4.3.2":
+"@types/pixi.js@^4.4.0":
   version "4.4.0"
   resolved "http://registry.npm.taobao.org/@types/pixi.js/download/@types/pixi.js-4.4.0.tgz#cc9463a78ca8a082166601d1c1f41aa88bb3dd46"
 
